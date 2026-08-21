@@ -3,7 +3,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 internal class Program
 {
-    public static void Main111111(string[] args)
+    public static void Main1111111(string[] args)
     {
         int a = 5, b = 6;
         //        1.to Add / Sum Two Numbers.

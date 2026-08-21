@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Channels;
 
 namespace Filr_btvn_buoi_1
 {
@@ -68,19 +69,94 @@ namespace Filr_btvn_buoi_1
             Console.WriteLine($" Tổng thanh toán:{tiendienchuathue + vat:C}VND");
 
         }
-
         static void Bai_2()
         {
+            Console.Write("Nhập chiều cao(m): ");
+            double cc = double.Parse(Console.ReadLine());
+            Console.Write("Nhập cân năng(kg): ");
+            double kg = double.Parse(Console.ReadLine());
+            double bmi = kg / (cc * cc);
+            double cannangtoithieu = 18.5 * cc * cc;
+            double cannangtoida = 22.9 * cc * cc;
+            Console.WriteLine($"Chỉ số BMI của bạn là {bmi:F2}");
+            if (bmi < 18.5)
+            {
+                Console.WriteLine("Phân loại sức khỏe: Gầy");
+
+            }
+            else if (bmi >= 18.5 && bmi < 23)
+
+            {
+                Console.WriteLine("Phân loại sức khỏe: Bình thường");
+
+            }
+            else if (bmi >= 23 && bmi < 25)
+            {
+                Console.WriteLine("Phân loại sức khỏe: Thừa cân");
+            }
+            else if (bmi >= 25)
+            {
+                Console.WriteLine("Phân loại sức khỏe: Béo phì");
+            }
+            Console.WriteLine($"Khuyên dùng: Cân năng lý tưởng của bạn nên từ {cannangtoithieu}kg đến {cannangtoida}kg");
+        }
+        
+        static void Bai_3()
+        {
+            Console.Write("Nhập số tiền:");
+
+            decimal vnd = decimal.Parse(Console.ReadLine());
+            Console.WriteLine("Chọn ngoại tệ 1=usd, 2= eur, 3=jpy, 4= gbp");
+            decimal pdv = vnd * 0.005m;
+            decimal vndd = vnd - pdv;
+            decimal usd = 1m/25400m * vndd;
+            decimal eur = 1m/27200m * vndd;
+            decimal jpy = 1m/165m * vndd;
+            decimal gbp = 1m/32100m * vndd;
+            Console.WriteLine($"Phí dịch vụ:{pdv:C}VND");
+            Console.WriteLine($"Số tiền vnd tính đổi:{vndd:C}VND");
+            Console.Write("Chọn số");
+            int chon = int.Parse(Console.ReadLine());
+            if (chon == 1)
+            {
+                Console.WriteLine($"Số tiền usd nhận được:{usd}");
+
+            }
+            else if (chon == 2)
+            {
+                Console.WriteLine($"Số tiền eur nhận được:{eur}");
+
+            }
+            else if (chon == 3)
+            {
+                Console.Write($"Số tiền jpy nhận được:{jpy}");
+
+            }
+            else if (chon == 4)
+            {
+                Console.Write($"Số tiền gbp nhận được{gbp}");
+
+            }
+
+
+
 
         }
+       
+
         public static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
-            Bai_1();
+            //   Bai_1();
+            // Bai_2();
+           // Bai_3();
 
 
 
-            
+
+
+
+
 
 
 
