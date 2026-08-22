@@ -73,7 +73,7 @@ namespace Filr_btvn_buoi_1
         static void Bai_2()
         {
             double cc;
-                double kg;
+            double kg;
             while (true)
             {
 
@@ -99,7 +99,7 @@ namespace Filr_btvn_buoi_1
                 }
                 Console.WriteLine("Cân nặng không hợp lệ");
             }
-                double bmi = kg / (cc * cc);
+            double bmi = kg / (cc * cc);
             double cannangtoithieu = 18.5 * cc * cc;
             double cannangtoida = 22.9 * cc * cc;
             Console.WriteLine($"Chỉ số BMI của bạn là {bmi:F2}");
@@ -131,8 +131,8 @@ namespace Filr_btvn_buoi_1
             while (true)
             {
 
-           
-            Console.Write("Nhập số tiền:");
+
+                Console.Write("Nhập số tiền:");
                 string nhapvao = Console.ReadLine();
                 if (decimal.TryParse(nhapvao, out vnd) && vnd >= 0)
                 {
@@ -141,7 +141,7 @@ namespace Filr_btvn_buoi_1
                 Console.WriteLine("Lỗi: Số tiền không hợp lệ. Vui lòng nhập lại số dương!\n");
             }
 
-           
+
             Console.WriteLine("Chọn ngoại tệ 1=usd, 2= eur, 3=jpy, 4= gbp");
             decimal pdv = vnd * 0.005m;
             decimal vndd = vnd - pdv;
@@ -220,17 +220,8 @@ namespace Filr_btvn_buoi_1
         }
 
 
-
-
-
-
-        public static void Main(string[] args)
+        static void Bai_5()
         {
-            Console.OutputEncoding = Encoding.UTF8;
-            //   Bai_1();
-            //Bai_2();
-            //Bai_3();
-            //Bai_4();
             int tcc;
             int tct;
             int tca;
@@ -249,17 +240,17 @@ namespace Filr_btvn_buoi_1
                 }
                 Console.WriteLine("Số tín chỉ không hợp lệ");
             }
-                while (true)
-                {
-                    Console.Write("Sô điểm môm lập trình của bạn là:");
-                    String nhapvaodc = Console.ReadLine();
+            while (true)
+            {
+                Console.Write("Sô điểm môm lập trình của bạn là:");
+                String nhapvaodc = Console.ReadLine();
                 if (double.TryParse(nhapvaodc, out dc) && dc >= 0 && dc <= 10)
                 {
                     break;
                 }
                 Console.WriteLine("Số điểm không hợp lệ");
-                }
-                while (true)
+            }
+            while (true)
             {
                 Console.Write("Số tín chỉ toán rời rạc của bạn là:");
                 string nhapvaotct = Console.ReadLine();
@@ -269,9 +260,9 @@ namespace Filr_btvn_buoi_1
 
                 }
                 Console.WriteLine("Số tín chỉ không hợp lệ");
-                
+
             }
-                while (true)
+            while (true)
             {
                 Console.Write("Số điểm toán rời rạc của bạn là:");
                 string nhapvaodt = Console.ReadLine();
@@ -281,18 +272,18 @@ namespace Filr_btvn_buoi_1
                 }
                 Console.WriteLine("Số điểm không hợp lệ");
             }
-                while (true)
+            while (true)
             {
                 Console.Write("Số tín chỉ môn tiếng anh của bạn là:");
                 string nhapvaosta = Console.ReadLine();
-                if (int.TryParse(nhapvaosta, out tca)&& tca > 0)
+                if (int.TryParse(nhapvaosta, out tca) && tca > 0)
 
                 {
                     break;
                 }
                 Console.WriteLine("Số tín chỉ không hợp lệ");
             }
-                while (true)
+            while (true)
             {
                 Console.Write("Số điểm tiếng anh của bạn là:");
                 string nhapvaoda = Console.ReadLine();
@@ -303,13 +294,65 @@ namespace Filr_btvn_buoi_1
                 Console.WriteLine("Số điểm không hợp lệ");
             }
             double dtb = (dc * tcc + da * tca + dt * tct) / (tcc + tca + tct);
+            char diemChu;
+            double gpa4;
+            string xepLoai;
+            if (dtb >= 8.5)
+            {
+                diemChu = 'A';
+                gpa4 = 4.0;
+                xepLoai = "Xuất sắc / Giỏi";
+            }
+            else if (dtb >= 7.0)
+            {
+                diemChu = 'B';
+                gpa4 = 3.0;
+                xepLoai = "Khá";
+            }
+            else if (dtb >= 5.5)
+            {
+                diemChu = 'C';
+                gpa4 = 2.0;
+                xepLoai = "Trung bình";
+            }
+            else if (dtb >= 4.0)
+            {
+                diemChu = 'D';
+                gpa4 = 1.0;
+                xepLoai = "Yếu";
+            }
+            else
+            {
+                diemChu = 'F';
+                gpa4 = 0.0;
+                xepLoai = "Kém (Trượt)";
+            }
 
+
+            Console.WriteLine($"Điểm TB Thang 10: {dtb:N2}");
+            Console.WriteLine($"Điểm Chữ Quy Đổi: {diemChu}");
+            Console.WriteLine($"Điểm GPA Thang 4: {gpa4:N1}");
+            Console.WriteLine($"Xếp Loại Học Lực: {xepLoai}");
         }
 
 
-    }
-    }
 
+
+
+
+        public static void Main(string[] args)
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+            //   Bai_1();
+            //Bai_2();
+            //Bai_3();
+            //Bai_4();
+            Bai_5();
+
+
+        }
+    }
+}
 
 
 
