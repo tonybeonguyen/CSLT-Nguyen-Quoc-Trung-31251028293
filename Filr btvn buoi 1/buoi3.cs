@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading.Channels;
 
@@ -71,11 +72,34 @@ namespace Filr_btvn_buoi_1
         }
         static void Bai_2()
         {
-            Console.Write("Nhập chiều cao(m): ");
-            double cc = double.Parse(Console.ReadLine());
-            Console.Write("Nhập cân năng(kg): ");
-            double kg = double.Parse(Console.ReadLine());
-            double bmi = kg / (cc * cc);
+            double cc;
+                double kg;
+            while (true)
+            {
+
+
+                Console.Write("Nhập chiều cao(m): ");
+                string nhapcc = Console.ReadLine();
+                if (double.TryParse(nhapcc, CultureInfo.InvariantCulture, out cc) && cc > 0)
+                {
+                    break;
+                }
+                Console.WriteLine("Chiều cao không hợp lệ");
+            }
+            while (true)
+            {
+
+
+                Console.Write("Nhập cân năng(kg): ");
+                string nhapkg = Console.ReadLine();
+
+                if (double.TryParse(nhapkg, CultureInfo.InvariantCulture, out kg) && kg > 0)
+                {
+                    break;
+                }
+                Console.WriteLine("Cân nặng không hợp lệ");
+            }
+                double bmi = kg / (cc * cc);
             double cannangtoithieu = 18.5 * cc * cc;
             double cannangtoida = 22.9 * cc * cc;
             Console.WriteLine($"Chỉ số BMI của bạn là {bmi:F2}");
@@ -100,41 +124,53 @@ namespace Filr_btvn_buoi_1
             }
             Console.WriteLine($"Khuyên dùng: Cân năng lý tưởng của bạn nên từ {cannangtoithieu}kg đến {cannangtoida}kg");
         }
-        
+
         static void Bai_3()
         {
-            Console.Write("Nhập số tiền:");
+            decimal vnd = 0;
+            while (true)
+            {
 
-            decimal vnd = decimal.Parse(Console.ReadLine());
+           
+            Console.Write("Nhập số tiền:");
+                string nhapvao = Console.ReadLine();
+                if (decimal.TryParse(nhapvao, out vnd) && vnd >= 0)
+                {
+                    break;
+                }
+                Console.WriteLine("Lỗi: Số tiền không hợp lệ. Vui lòng nhập lại số dương!\n");
+            }
+
+           
             Console.WriteLine("Chọn ngoại tệ 1=usd, 2= eur, 3=jpy, 4= gbp");
             decimal pdv = vnd * 0.005m;
             decimal vndd = vnd - pdv;
-            decimal usd = 1m/25400m * vndd;
-            decimal eur = 1m/27200m * vndd;
-            decimal jpy = 1m/165m * vndd;
-            decimal gbp = 1m/32100m * vndd;
+            decimal usd = 1m / 25400m * vndd;
+            decimal eur = 1m / 27200m * vndd;
+            decimal jpy = 1m / 165m * vndd;
+            decimal gbp = 1m / 32100m * vndd;
             Console.WriteLine($"Phí dịch vụ:{pdv:C}VND");
             Console.WriteLine($"Số tiền vnd tính đổi:{vndd:C}VND");
             Console.Write("Chọn số");
             int chon = int.Parse(Console.ReadLine());
             if (chon == 1)
             {
-                Console.WriteLine($"Số tiền usd nhận được:{usd}");
+                Console.WriteLine($"Số tiền usd nhận được:{usd:N2}");
 
             }
             else if (chon == 2)
             {
-                Console.WriteLine($"Số tiền eur nhận được:{eur}");
+                Console.WriteLine($"Số tiền eur nhận được:{eur:N2}");
 
             }
             else if (chon == 3)
             {
-                Console.Write($"Số tiền jpy nhận được:{jpy}");
+                Console.Write($"Số tiền jpy nhận được:{jpy:N2}");
 
             }
             else if (chon == 4)
             {
-                Console.Write($"Số tiền gbp nhận được{gbp}");
+                Console.Write($"Số tiền gbp nhận được{gbp:N2}");
 
             }
 
@@ -142,27 +178,151 @@ namespace Filr_btvn_buoi_1
 
 
         }
-       
+
+        static void Bai_4()
+        {
+            while (true)
+            {
+                Console.Write("Nhập ngày sinh (dd/MM/yyyy): ");
+                string ns = Console.ReadLine();
+
+                if (DateTime.TryParseExact(ns, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime ngaysinh))
+                {
+                    DateTime today = DateTime.Now.Date;
+
+                    int tuoi = today.Year - ngaysinh.Year;
+                    if (ngaysinh.Date > today.AddYears(-tuoi))
+                    {
+                        tuoi--;
+                    }
+
+                    TimeSpan lived = today - ngaysinh;
+                    int tongsongay = (int)lived.TotalDays;
+
+                    DateTime sntt = ngaysinh.AddYears(today.Year - ngaysinh.Year);
+                    if (sntt < today)
+                    {
+                        sntt = ngaysinh.AddYears(today.Year - ngaysinh.Year + 1);
+                    }
+
+                    int ngayconlai = (int)(sntt - today).TotalDays;
+
+                    Console.WriteLine($"Tuổi hiện tại: {tuoi} tuổi");
+                    Console.WriteLine($"Bạn đã sống tổng cộng: {tongsongay:N0} ngày");
+                    Console.WriteLine($"Sinh nhật tiếp theo còn: {ngayconlai} ngày nữa");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Lỗi: Định dạng ngày sinh không hợp lệ. Vui lòng nhập lại theo đúng định dạng dd/MM/yyyy!\n");
+                }
+            }
+        }
+
+
+
+
+
 
         public static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
             //   Bai_1();
-            // Bai_2();
-           // Bai_3();
+            //Bai_2();
+            //Bai_3();
+            //Bai_4();
+            int tcc;
+            int tct;
+            int tca;
+            double dc;
+            double dt;
+            double da;
 
+            while (true)
+            {
+                Console.Write("Số tín chỉ lập trình của bạn là:");
+                string nhapvaotcc = Console.ReadLine();
+                if (int.TryParse(nhapvaotcc, out tcc) && tcc > 0)
+                {
+                    break;
 
+                }
+                Console.WriteLine("Số tín chỉ không hợp lệ");
+            }
+                while (true)
+                {
+                    Console.Write("Sô điểm môm lập trình của bạn là:");
+                    String nhapvaodc = Console.ReadLine();
+                if (double.TryParse(nhapvaodc, out dc) && dc >= 0 && dc <= 10)
+                {
+                    break;
+                }
+                Console.WriteLine("Số điểm không hợp lệ");
+                }
+                while (true)
+            {
+                Console.Write("Số tín chỉ toán rời rạc của bạn là:");
+                string nhapvaotct = Console.ReadLine();
+                if (int.TryParse(nhapvaotct, out tct) && tct > 0)
+                {
+                    break;
 
+                }
+                Console.WriteLine("Số tín chỉ không hợp lệ");
+                
+            }
+                while (true)
+            {
+                Console.Write("Số điểm toán rời rạc của bạn là:");
+                string nhapvaodt = Console.ReadLine();
+                if (double.TryParse(nhapvaodt, out dt) && dt >= 0 && dt <= 10)
+                {
+                    break;
+                }
+                Console.WriteLine("Số điểm không hợp lệ");
+            }
+                while (true)
+            {
+                Console.Write("Số tín chỉ môn tiếng anh của bạn là:");
+                string nhapvaosta = Console.ReadLine();
+                if (int.TryParse(nhapvaosta, out tca)&& tca > 0)
 
-
-
-
-
-
-
-
-
+                {
+                    break;
+                }
+                Console.WriteLine("Số tín chỉ không hợp lệ");
+            }
+                while (true)
+            {
+                Console.Write("Số điểm tiếng anh của bạn là:");
+                string nhapvaoda = Console.ReadLine();
+                if (double.TryParse(nhapvaoda, out da) && da >= 0 && da <= 10)
+                {
+                    break;
+                }
+                Console.WriteLine("Số điểm không hợp lệ");
+            }
+            double dtb = (dc * tcc + da * tca + dt * tct) / (tcc + tca + tct);
 
         }
+
+
     }
-}
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
