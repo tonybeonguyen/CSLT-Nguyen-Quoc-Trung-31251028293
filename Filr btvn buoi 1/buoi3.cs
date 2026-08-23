@@ -514,6 +514,62 @@ namespace Filr_btvn_buoi_1
             Console.WriteLine($"Thời gian trôi qua: {tgc.Minutes} phút {tgc.Seconds} giây");
             Console.WriteLine("Trạng thái xác thực: THÀNH CÔNG - Giao dịch đã được phê duyệt.");
         }
+        
+        static void Bai_9()
+        {
+            decimal gross = 0;
+            int snpt = 0;
+            while (true)
+            {
+                Console.Write("Lương gross:");
+                string grossnhap = Console.ReadLine();
+                if (decimal.TryParse(grossnhap, out gross) && gross >= 0)
+                {
+                    break;
+                }
+                Console.WriteLine("Lương gross không hợp lệ");
+            }
+            while (true)
+            {
+                Console.Write("Số người phụ thuộc:");
+                string snptnhap = Console.ReadLine();
+                if (int.TryParse(snptnhap, out snpt) && snpt >= 0)
+                {
+                    break;
+                }
+                Console.WriteLine("Số người phụ thuộc không hợp lệ");
+
+            }
+
+            decimal gtbh = gross * 0.105m;
+            decimal tnct = gross - gtbh - 11000000 - 4400000 * snpt;
+            if (tnct < 0)
+            {
+                tnct = 0;
+            }
+            decimal ttncn = 0;
+
+            if (tnct <= 5000000)
+            {
+                ttncn = tnct * 0.05m;
+            }
+            else if (tnct > 500000 && tnct <= 10000000)
+            {
+                ttncn = 5000000m * 0.05m + (tnct - 5000000) * 0.1m;
+            }
+            else if (tnct > 10000000 && tnct <= 18000000)
+            {
+                ttncn = 5000000 * 0.05m + 5000000 * 0.1m + (tnct - 10000000) * 0.15m;
+            }
+            else if (tnct > 18000000)
+            {
+                ttncn = 5000000 * 0.05m + 5000000 * 0.1m + 8000000 * 0.15m + (tnct - 18000000) * 0.2m;
+                Console.WriteLine($"Giảm trừ bảo hiểm (10.5%): {gtbh:C}");
+            }
+            Console.WriteLine($"Thu nhập chịu thuế: {tnct:C}");
+            Console.WriteLine($"Thuế TNCN phải nộp: {ttncn:C}");
+            Console.WriteLine($"Lượng net thực nhận: {gross - gtbh - ttncn:C}");
+        }
         public static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
@@ -526,11 +582,13 @@ namespace Filr_btvn_buoi_1
             //Bai_6();
             //Bai_7();
             //Bai_8();
-         
+            //Bai_9();
             
+
+
         }
-    
-    
+
+
     }
 }
 
