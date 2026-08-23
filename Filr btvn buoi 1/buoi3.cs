@@ -453,7 +453,67 @@ namespace Filr_btvn_buoi_1
             Console.WriteLine($"Chi phí mỗi người:{cpmng:C}VND");
         }
 
+        static void Bai_8()
+        {
+            string otpdung = "839201";
+            DateTime tgt = DateTime.Now;
+            Console.WriteLine($"[Hệ thống] Đã gửi mã OTP (Mã đúng: {otpdung}) vào lúc: {tgt:HH:mm:ss}");
 
+
+            Console.Write("Nhập mã OTP:");
+            string otpnhap = Console.ReadLine();
+            int giaytroiqua;
+            while (true)
+            {
+                Console.Write("Nhập số giây trôi qua kể từ lúc phát hành ( giây): ");
+                string giaytroiquanhap = Console.ReadLine();
+                if (int.TryParse(giaytroiquanhap, out giaytroiqua))
+                {
+                    break;
+                }
+                Console.WriteLine("Số giây trôi qua không hợp lệ");
+            }
+
+
+
+
+            DateTime tgxm = tgt.AddSeconds(giaytroiqua);
+            bool ketqua = true;
+            if (string.IsNullOrEmpty(otpnhap) || otpnhap.Length != 6)
+            {
+                ketqua = false;
+            }
+            else
+            {
+                foreach (char c in otpnhap)
+                {
+                    if (!char.IsDigit(c))
+                    {
+                        ketqua = false;
+                        break;
+
+                    }
+                }
+            }
+            if (!ketqua)
+            {
+                Console.WriteLine("Trạng thái xác thực: LỖI CỤ THỂ - Định dạng không hợp lệ (OTP phải gồm đúng 6 chữ số).");
+                return;
+            }
+            TimeSpan tgc = tgxm - tgt;
+            if (tgc.TotalSeconds > 300)
+            {
+                Console.WriteLine($"Trạng thái xác thực: LỖI CỤ THỂ - Hết hạn OTP (Thời gian trôi qua: {tgc.TotalSeconds} giây).");
+                return;
+            }
+            if (otpnhap != otpdung)
+            {
+                Console.WriteLine("Trạng thái xác thực: LỖI CỤ THỂ - Mã sai.");
+                return;
+            }
+            Console.WriteLine($"Thời gian trôi qua: {tgc.Minutes} phút {tgc.Seconds} giây");
+            Console.WriteLine("Trạng thái xác thực: THÀNH CÔNG - Giao dịch đã được phê duyệt.");
+        }
         public static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
@@ -465,9 +525,12 @@ namespace Filr_btvn_buoi_1
             //  Bai_5();
             //Bai_6();
             //Bai_7();
+            //Bai_8();
+         
             
-
         }
+    
+    
     }
 }
 
