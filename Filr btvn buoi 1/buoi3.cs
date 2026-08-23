@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Channels;
 
@@ -335,20 +336,136 @@ namespace Filr_btvn_buoi_1
             Console.WriteLine($"Xếp Loại Học Lực: {xepLoai}");
         }
 
+        static void Bai_6()
+        {
+            static string bodau(string text)
+            {
+                string source = "áàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵđ";
+                string destination = "aaaaaaaaaaaaaaaaaeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyyd";
+
+                char[] chars = text.ToLower().ToCharArray();
+                for (int i = 0; i < chars.Length; i++)
+                {
+                    int index = source.IndexOf(chars[i]);
+                    if (index >= 0)
+                    {
+                        chars[i] = destination[index];
+                    }
+                }
+                return new string(chars);
+            }
+            Console.Write("Nhập họ tên thô:");
+            string tentho = Console.ReadLine();
+
+
+            string[] ten = tentho.Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+
+            string ten1 = string.Join(" ", ten);
+
+
+            string tendung = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(ten1.ToLower());
+            string[] tendungtach = tendung.Split(' ');
 
 
 
+            string ho = tendungtach.Length > 0 ? tendungtach[0] : "";
+            string tenng = tendungtach.Length > 0 ? tendungtach[tendungtach.Length - 1] : "";
+
+            string tenDem = "";
+            if (tendungtach.Length > 2)
+            {
+
+                string[] middleWords = new string[tendungtach.Length - 2];
+                Array.Copy(tendungtach, 1, middleWords, 0, tendungtach.Length - 2);
+                tenDem = string.Join(" ", middleWords);
+
+            }
+
+            Console.WriteLine($"Họ tên chuẩn hóa:{tendung}");
+            Console.WriteLine($"Họ: {ho} | Tên đệm: {tenDem} | Tên: {tenng}");
+            string ho1 = bodau(ho).ToLower();
+            string tendem1 = bodau(tenDem).ToLower().Replace(" ", "");
+            string tenng1 = bodau(tenng).ToLower();
+            Console.WriteLine($"Usernam tạo tự động: {tenng1}.{ho1}{tendem1}");
+            Console.WriteLine($"Email cấp phát:{tenng1}.{ho1}{tendem1}@company.edu.vn");
+        }
+
+        static void Bai_7()
+        {
+            double qd = 0;
+            double xang = 0;
+            decimal giaxang = 0;
+            int snd = 0;
+            while (true)
+            {
+
+
+                Console.Write("Quãng đường (km):");
+                string nhapvaoqd = Console.ReadLine();
+                if (double.TryParse(nhapvaoqd, out qd) && qd >= 0)
+                {
+                    break;
+                }
+                Console.WriteLine("Quãng đường không hợp lệ");
+            }
+            while (true)
+            {
+
+
+                Console.Write("Mức tiêu hao (l/100km):");
+                string nhapvaoxang = Console.ReadLine();
+                if (double.TryParse(nhapvaoxang, out xang) && xang >= 0)
+                {
+                    break;
+                }
+                Console.WriteLine("Mức tiêu hao không hợp lệ");
+            }
+            while (true)
+            {
+
+
+                Console.Write("Giá xăng hiện tại (VND/l):");
+                string nhapvaogx = Console.ReadLine();
+                if (decimal.TryParse(nhapvaogx, out giaxang) && giaxang >= 0)
+                {
+                    break;
+                }
+                Console.WriteLine("Giá xăng không hợp lệ");
+            }
+            while (true)
+            {
+
+
+                Console.Write("Số người đi");
+                string nhapvaosnd = Console.ReadLine();
+                if (int.TryParse(nhapvaosnd, out snd) && snd >= 0)
+                {
+                    break;
+                }
+                Console.WriteLine("Số người đi không hợp lệ");
+            }
+            double txd = (qd / 100) * xang;
+            decimal cp = (decimal)txd * giaxang;
+            decimal cpmng = Math.Ceiling(cp / snd);
+            Console.WriteLine($"Tổng nhiên liệu tiêu thụ:{txd}lít");
+            Console.WriteLine($"Tổng chi phí xăng dầu:{cp:C}VND");
+            Console.WriteLine($"Chi phí mỗi người:{cpmng:C}VND");
+        }
 
 
         public static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
+            Console.InputEncoding = Encoding.UTF8;
             //   Bai_1();
             //Bai_2();
             //Bai_3();
             //Bai_4();
-            Bai_5();
-
+            //  Bai_5();
+            //Bai_6();
+            //Bai_7();
+            
 
         }
     }
