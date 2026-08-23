@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -9,6 +10,13 @@ namespace Filr_btvn_buoi_1
 {
     internal class buoi3
     {
+        enum StockStatus
+        {
+            OutOfStock,
+            LowStock,
+            InStock,
+            Discontinued
+        }
         static void Bai_1()
         {
             Console.Write("Nhập chỉ số điện cũ: ");
@@ -514,7 +522,7 @@ namespace Filr_btvn_buoi_1
             Console.WriteLine($"Thời gian trôi qua: {tgc.Minutes} phút {tgc.Seconds} giây");
             Console.WriteLine("Trạng thái xác thực: THÀNH CÔNG - Giao dịch đã được phê duyệt.");
         }
-        
+
         static void Bai_9()
         {
             decimal gross = 0;
@@ -570,6 +578,40 @@ namespace Filr_btvn_buoi_1
             Console.WriteLine($"Thuế TNCN phải nộp: {ttncn:C}");
             Console.WriteLine($"Lượng net thực nhận: {gross - gtbh - ttncn:C}");
         }
+
+        static void Bai_10()
+        {
+            string idsp = "KB - 09";
+            string tensp = "Bàn phím cơ Akko";
+            int? quantity = null;
+            int minThreshold = 10;
+            DateTime? restockDate = null;
+            int quantity1 = quantity ?? 0;
+            StockStatus status;
+            if (quantity == null || quantity == 0)
+            {
+                status = StockStatus.OutOfStock;
+            }
+            else if (quantity < minThreshold)
+            {
+                status = StockStatus.LowStock;
+            }
+            else
+            {
+                status = StockStatus.InStock;
+            }
+            string ngaynhap = restockDate?.ToString("dd/MM/yyyy") ?? "Chưa có lịch nhập hàng";
+            Console.WriteLine("--- INPUT / DATA ---");
+            Console.WriteLine($"Sản phẩm: {tensp} (Mã: {idsp})");
+            Console.WriteLine($"Số lượng tồn kho: {(quantity.HasValue ? quantity.ToString() : "null (Chưa kiểm kê)")}");
+            Console.WriteLine($"Restock Date: {(restockDate.HasValue ? restockDate.Value.ToString("dd/MM/yyyy") : "null")}");
+
+            Console.WriteLine("\n--- OUTPUT ---");
+            Console.WriteLine($"Số lượng hiển thị: {quantity1} {(quantity == null ? "(Cảnh báo: Dữ liệu trống)" : "")}");
+            Console.WriteLine($"Trạng thái kho: {status} (Hết hàng)");
+            Console.WriteLine($"Dự kiến nhập hàng: {ngaynhap}");
+
+        }
         public static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
@@ -583,15 +625,15 @@ namespace Filr_btvn_buoi_1
             //Bai_7();
             //Bai_8();
             //Bai_9();
-            
-
-
+           // Bai_10();
+        
+        
+        
         }
 
 
     }
 }
-
 
 
 
