@@ -17,6 +17,15 @@ namespace Filr_btvn_buoi_1
             InStock,
             Discontinued
         }
+
+        enum VehicleType
+        {
+            Motorbike,
+            Car,
+            Truck,
+
+        }
+
         static void Bai_1()
         {
             Console.Write("Nhập chỉ số điện cũ: ");
@@ -660,10 +669,60 @@ namespace Filr_btvn_buoi_1
 
         }
 
-        static void Bai_12()
+        static void Bai_13()
         {
+            Console.Write("Loại xe");
+            string lxnhap = Console.ReadLine();
+            Console.Write("Giờ vào (yyyy-MM-đd HH:mm):");
+            string lvnhap= Console.ReadLine();
+           
+            Console.Write("Giờ ra (yyyy-MM-đd HH:mm):");
+            string lrnhap = Console.ReadLine();
+            DateTime lv = DateTime.Parse(lvnhap);
+            DateTime lr = DateTime.Parse(lrnhap);
+            TimeSpan ttg = lr - lv;
+            double ttg1 = Math.Ceiling(ttg.TotalHours);
+            decimal haigd = 0;
+            decimal giosau = 0;
+            decimal giagiosau = 0;
+            decimal phuphiquadem = 0;
+
+
+            VehicleType vehicle;
+            if (lxnhap.Equals("Motorbike", StringComparison.OrdinalIgnoreCase))
+            {
+                vehicle = VehicleType.Motorbike;
+                haigd = 5000;
+                giosau = 2000;
+            }
+            else if (lxnhap.Equals("Car", StringComparison.OrdinalIgnoreCase))
+            {
+                vehicle = VehicleType.Car;
+                haigd = 20000;
+                giosau = 10000;
+
+            }
+            else 
+            {
+                vehicle = VehicleType.Truck;
+                haigd = 50000;
+                giosau = 25000;
+            }
+            if (ttg1 > 2)
+            {
+                giagiosau = giosau * (decimal)(ttg1 - 2);
+            }
+            bool quadem = (lr.Date > lv.Date);
+            if (quadem)
+            {
+                phuphiquadem = 60000;
+            }
+            Console.WriteLine($"Tổng thời gian đỗ:{ttg1}");
+            Console.WriteLine($"Phi 2 giờ đầu: {haigd}");
+            Console.WriteLine($"Tổng phí:{phuphiquadem + haigd + giagiosau}");
 
         }
+
         public static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
@@ -679,7 +738,7 @@ namespace Filr_btvn_buoi_1
             //Bai_9();
             // Bai_10();
             // Bai_11();
-            Bai_12();
+            //Bai_13();
         
         }
 
