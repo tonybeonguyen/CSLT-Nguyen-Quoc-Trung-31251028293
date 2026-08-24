@@ -26,6 +26,15 @@ namespace Filr_btvn_buoi_1
 
         }
 
+        enum CurrencyType
+        {
+         USD,   
+         EUR,
+         JPY,
+         GBP,
+
+        }
+
         static void Bai_1()
         {
             Console.Write("Nhập chỉ số điện cũ: ");
@@ -146,6 +155,8 @@ namespace Filr_btvn_buoi_1
         static void Bai_3()
         {
             decimal vnd = 0;
+            decimal tyGia = 0;
+            string tenNgoaiTe = "";
             while (true)
             {
 
@@ -156,41 +167,61 @@ namespace Filr_btvn_buoi_1
                 {
                     break;
                 }
-                Console.WriteLine("Lỗi: Số tiền không hợp lệ. Vui lòng nhập lại số dương!\n");
+                Console.WriteLine("Lỗi: Số tiền không hợp lệ. Vui lòng nhập lại ");
             }
 
-
-            Console.WriteLine("Chọn ngoại tệ 1=usd, 2= eur, 3=jpy, 4= gbp");
-            decimal pdv = vnd * 0.005m;
-            decimal vndd = vnd - pdv;
-            decimal usd = 1m / 25400m * vndd;
-            decimal eur = 1m / 27200m * vndd;
-            decimal jpy = 1m / 165m * vndd;
-            decimal gbp = 1m / 32100m * vndd;
-            Console.WriteLine($"Phí dịch vụ:{pdv:C}VND");
-            Console.WriteLine($"Số tiền vnd tính đổi:{vndd:C}VND");
-            Console.Write("Chọn số");
-            int chon = int.Parse(Console.ReadLine());
-            if (chon == 1)
+            while (true)
             {
-                Console.WriteLine($"Số tiền usd nhận được:{usd:N2}");
 
-            }
-            else if (chon == 2)
-            {
-                Console.WriteLine($"Số tiền eur nhận được:{eur:N2}");
 
-            }
-            else if (chon == 3)
-            {
-                Console.Write($"Số tiền jpy nhận được:{jpy:N2}");
+                Console.WriteLine("Chọn loại ngoại tệ muốn đổi:");
+                Console.WriteLine("1 - USD");
+                Console.WriteLine("2 - EUR");
+                Console.WriteLine("3 - JPY");
+                Console.WriteLine("4 - GBP");
+                Console.Write("Lựa chọn của bạn (1-4): ");
+                string luaChon = Console.ReadLine();
 
-            }
-            else if (chon == 4)
-            {
-                Console.Write($"Số tiền gbp nhận được{gbp:N2}");
+                
+                CurrencyType currency;
 
+                switch (luaChon)
+                {
+                    case "1":
+                        currency = CurrencyType.USD;
+                        tyGia = 25400m;
+                        tenNgoaiTe = "USD";
+                        break;
+                    case "2":
+                        currency = CurrencyType.EUR;
+                        tyGia = 27200m;
+                        tenNgoaiTe = "EUR";
+                        break;
+                    case "3":
+                        currency = CurrencyType.JPY;
+                        tyGia = 165m;
+                        tenNgoaiTe = "JPY";
+                        break;
+                    case "4":
+                        currency = CurrencyType.GBP;
+                        tyGia = 32100m;
+                        tenNgoaiTe = "GBP";
+                        break;
+                    default:
+                        Console.WriteLine("Lựa chọn không hợp lệ!");
+                        continue;
+                }
+                break;
             }
+            decimal phiDichVu = vnd * 0.005m;
+            decimal soTienThucDoi = vnd - phiDichVu;
+            decimal soTienNgoaiTe = soTienThucDoi / tyGia;
+
+            
+
+            Console.WriteLine($"Phí dịch vụ (0.5%): {phiDichVu:N0} VNĐ");
+            Console.WriteLine($"Số tiền VNĐ tính đổi: {soTienThucDoi:N0} VNĐ");
+            Console.WriteLine($"Số tiền {tenNgoaiTe} nhận được: {soTienNgoaiTe:N2} {tenNgoaiTe}");
 
 
 
@@ -669,6 +700,11 @@ namespace Filr_btvn_buoi_1
 
         }
 
+        static void Bai_12()
+        {
+
+        }
+
         static void Bai_13()
         {
             Console.Write("Loại xe");
@@ -729,15 +765,16 @@ namespace Filr_btvn_buoi_1
             Console.InputEncoding = Encoding.UTF8;
             //   Bai_1();
             //Bai_2();
-            //Bai_3();
+            //Bai_3(); 
             //Bai_4();
-            //  Bai_5();
+            //Bai_5();
             //Bai_6();
             //Bai_7();
             //Bai_8();
             //Bai_9();
             // Bai_10();
             // Bai_11();
+            Bai_12();
             //Bai_13();
         
         }
