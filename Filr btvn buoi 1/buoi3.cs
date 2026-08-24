@@ -612,6 +612,58 @@ namespace Filr_btvn_buoi_1
             Console.WriteLine($"Dự kiến nhập hàng: {ngaynhap}");
 
         }
+
+        static void Bai_11()
+        {
+            decimal stgbd = 0;
+            double lsm = 0;
+            int khg = 0;
+            while (true)
+            {
+                Console.Write("Số tiền gửi:");
+                string stgnhap = Console.ReadLine();
+                if (decimal.TryParse(stgnhap, out stgbd) && stgbd > 0)
+                {
+                    break;
+                }
+                Console.WriteLine("Số tiền gửi không hợp lệ");
+
+
+            }
+            while (true)
+            {
+                Console.Write("lãi suất năm r (%):");
+                string lsnhap = Console.ReadLine();
+                if (double.TryParse(lsnhap, out lsm) && lsm > 0)
+                {
+                    break;
+                }
+                Console.WriteLine("Lãi suất không hợp lệ");
+            }
+            while (true)
+            {
+                Console.Write("Kỳ hạn gửi (tháng):");
+                string khgnhap = Console.ReadLine();
+                if (int.TryParse(khgnhap, out khg) && khg > 0)
+                {
+                    break;
+                }
+                Console.WriteLine("Kỳ hạn gửi không hợp lệ");
+            }
+            decimal ld = stgbd * (decimal)(lsm / 100) * (decimal)(khg / 12.0);
+            double lkd = (double)stgbd * Math.Pow((1 + (lsm / 100) / 12), khg) - (double)(stgbd);
+            decimal lk = (decimal)lkd;
+            Console.WriteLine($"Tổng tiền lãi(lãi đơn):{ld:C}VND");
+            Console.WriteLine($"Tổng tiền lãi(lãi kép):{lk:C}VND");
+            Console.WriteLine($"Lợi nhuận chênh lệch:{lk - ld:C}VND");
+
+
+        }
+
+        static void Bai_12()
+        {
+
+        }
         public static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
@@ -625,9 +677,9 @@ namespace Filr_btvn_buoi_1
             //Bai_7();
             //Bai_8();
             //Bai_9();
-           // Bai_10();
-        
-        
+            // Bai_10();
+            // Bai_11();
+            Bai_12();
         
         }
 
