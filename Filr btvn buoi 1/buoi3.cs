@@ -710,8 +710,8 @@ namespace Filr_btvn_buoi_1
             Console.Write("Loại xe");
             string lxnhap = Console.ReadLine();
             Console.Write("Giờ vào (yyyy-MM-đd HH:mm):");
-            string lvnhap= Console.ReadLine();
-           
+            string lvnhap = Console.ReadLine();
+
             Console.Write("Giờ ra (yyyy-MM-đd HH:mm):");
             string lrnhap = Console.ReadLine();
             DateTime lv = DateTime.Parse(lvnhap);
@@ -738,7 +738,7 @@ namespace Filr_btvn_buoi_1
                 giosau = 10000;
 
             }
-            else 
+            else
             {
                 vehicle = VehicleType.Truck;
                 haigd = 50000;
@@ -759,6 +759,22 @@ namespace Filr_btvn_buoi_1
 
         }
 
+        static void Bai_14()
+        {
+            int chuoiso = 0;
+            while (true)
+            {
+                Console.WriteLine("Nhập chuỗi số:");
+                string nhapchuoiso = Console.ReadLine();
+                if (int.TryParse(nhapchuoiso, out chuoiso))
+                {
+                    break;
+                }
+                Console.WriteLine("Chuỗi số không hợp lệ, vui lòng nhập lại");
+
+            }
+            if(long.TryParse(chuoiso))
+        }
         public static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
@@ -774,8 +790,9 @@ namespace Filr_btvn_buoi_1
             //Bai_9();
             // Bai_10();
             // Bai_11();
-            Bai_12();
+            // Bai_12();
             //Bai_13();
+            Bai_14();
         
         }
 
