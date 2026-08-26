@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Channels;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Filr_btvn_buoi_1
 {
@@ -28,10 +29,19 @@ namespace Filr_btvn_buoi_1
 
         enum CurrencyType
         {
-         USD,   
-         EUR,
-         JPY,
-         GBP,
+            USD,
+            EUR,
+            JPY,
+            GBP,
+
+        }
+
+        enum CustomerType
+        {
+            Child,
+            Student,
+            Adult,
+            Senior,
 
         }
 
@@ -182,7 +192,7 @@ namespace Filr_btvn_buoi_1
                 Console.Write("Lựa chọn của bạn (1-4): ");
                 string luaChon = Console.ReadLine();
 
-                
+
                 CurrencyType currency;
 
                 switch (luaChon)
@@ -217,7 +227,7 @@ namespace Filr_btvn_buoi_1
             decimal soTienThucDoi = vnd - phiDichVu;
             decimal soTienNgoaiTe = soTienThucDoi / tyGia;
 
-            
+
 
             Console.WriteLine($"Phí dịch vụ (0.5%): {phiDichVu:N0} VNĐ");
             Console.WriteLine($"Số tiền VNĐ tính đổi: {soTienThucDoi:N0} VNĐ");
@@ -292,7 +302,7 @@ namespace Filr_btvn_buoi_1
             while (true)
             {
                 Console.Write("Sô điểm môm lập trình của bạn là:");
-                String nhapvaodc = Console.ReadLine();
+                string nhapvaodc = Console.ReadLine();
                 if (double.TryParse(nhapvaodc, out dc) && dc >= 0 && dc <= 10)
                 {
                     break;
@@ -702,7 +712,67 @@ namespace Filr_btvn_buoi_1
 
         static void Bai_12()
         {
+            Console.Write("Nhập văn bản cần mã hóa: ");
+            string nhapmahoa = Console.ReadLine();
 
+            int k = 0;
+            while (true)
+            {
+                Console.Write("Nhập khóa dịch chuyển Key k (từ 1 đến 25): ");
+                if (int.TryParse(Console.ReadLine(), out k) && k >= 1 && k <= 25)
+                {
+                    break;
+                }
+                Console.WriteLine("Lỗi: Khóa k phải là số nguyên từ 1 đến 25. Vui lòng nhập lại!\n");
+            }
+
+            string encryptedText = EncryptCaesar(nhapmahoa, k);
+            Console.WriteLine($"\nVăn bản Mã hóa: {encryptedText}");
+
+            string decryptedText = DecryptCaesar(encryptedText, k);
+            Console.WriteLine($"Văn bản Giải mã: {decryptedText}");
+        }
+
+        static string EncryptCaesar(string text, int k)
+        {
+            char[] chars = text.ToCharArray();
+
+            for (int i = 0; i < chars.Length; i++)
+            {
+                char c = chars[i];
+
+                if (c >= 'A' && c <= 'Z')
+                {
+                    chars[i] = (char)('A' + (c - 'A' + k) % 26);
+                }
+                else if (c >= 'a' && c <= 'z')
+                {
+                    chars[i] = (char)('a' + (c - 'a' + k) % 26);
+                }
+            }
+
+            return new string(chars);
+        }
+
+        static string DecryptCaesar(string text, int k)
+        {
+            char[] chars = text.ToCharArray();
+
+            for (int i = 0; i < chars.Length; i++)
+            {
+                char c = chars[i];
+
+                if (c >= 'A' && c <= 'Z')
+                {
+                    chars[i] = (char)('A' + (c - 'A' - k + 26) % 26);
+                }
+                else if (c >= 'a' && c <= 'z')
+                {
+                    chars[i] = (char)('a' + (c - 'a' - k + 26) % 26);
+                }
+            }
+
+            return new string(chars);
         }
 
         static void Bai_13()
@@ -773,27 +843,142 @@ namespace Filr_btvn_buoi_1
                 Console.WriteLine("Chuỗi số không hợp lệ, vui lòng nhập lại");
 
             }
-            if(long.TryParse(chuoiso))
+            if (chuoiso >= byte.MinValue && chuoiso <= byte.MaxValue)
+            {
+                Console.WriteLine("Phù hợp kiểu byte: CÓ (Vừa vặn trong dải 0-255)");
+            }
+            else
+            {
+                Console.WriteLine("Phù hợp kiểu byte: KHÔNG");
+            }
+
+            if (chuoiso >= short.MinValue && chuoiso <= short.MaxValue)
+            {
+                Console.WriteLine("Phù hợp kiểu short: CÓ (Vừa vặn trong dải -32,768 đến 32,767)");
+            }
+            else
+            {
+                Console.WriteLine("Phù hợp kiểu short: KHÔNG");
+            }
+            int tongso = 0;
+            string buoc = "";
+            if (chuoiso == 0)
+            {
+                tongso = 0;
+                buoc = "0";
+            }
+            else
+            {
+                while (chuoiso > 0)
+                {
+                    int cong = chuoiso % 10;
+                    tongso = tongso + cong;
+                    buoc = (buoc == "") ? cong.ToString() : cong + "+" + buoc;
+                    chuoiso = chuoiso / 10;
+                }
+            }
+            try
+            {
+                checked
+                {
+                    
+                    int testOverflow = chuoiso;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        testOverflow = testOverflow * 10;
+                    }
+                    Console.WriteLine("Kiểm tra Tràn số: An toàn trong phạm vi int32.");
+                }
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Kiểm tra Tràn số: CẢNH BÁO! Đã xảy ra tràn số (OverflowException) khi tính toán giá trị lớn.");
+            }
         }
+
+        static void Bai_15()
+        {
+            decimal giagoc = 100000m;
+            decimal giamgia = 0m;
+            decimal phuthu = 0m;
+            string lido = "Không có";
+            CustomerType customer;
+            while (true)
+            {
+                Console.WriteLine("Chọn loại khách hàng (0: Child, 1: Student, 2: Adult, 3: Senior):");
+                string khnhap = Console.ReadLine();
+
+                if (int.TryParse(khnhap, out int loaikh) && loaikh >= 0 && loaikh <= 3)
+                {
+                    customer = (CustomerType)loaikh;
+                    break; 
+                }
+
+                Console.WriteLine("Lựa chọn không hợp lệ! Vui lòng chỉ nhập số từ 1 đến 4.");
+            }
+            
+
+            bool hasStudentCard = false;
+            if (customer == CustomerType.Student)
+            {
+                Console.Write("Có thẻ sinh viên hợp lệ không? (True/False): ");
+                hasStudentCard = bool.Parse(Console.ReadLine());
+            }
+
+            Console.Write("Nhập ngày xem trong tuần (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday): ");
+            DayOfWeek day = Enum.Parse<DayOfWeek>(Console.ReadLine(), true);
+
+            if (customer == CustomerType.Child || customer == CustomerType.Senior)
+            {
+                giamgia = giagoc * 0.5m;
+                lido = customer == CustomerType.Child ? "Giảm giá Trẻ em (50%)" : "Giảm giá Người cao tuổi (50%)";
+            }
+            else if (customer == CustomerType.Student && hasStudentCard && day >= DayOfWeek.Monday && day <= DayOfWeek.Thursday)
+            {
+                giamgia = giagoc * 0.3m;
+                lido = "Giảm giá SV (30%)";
+            }
+            else if (customer == CustomerType.Adult && day == DayOfWeek.Wednesday)
+            {
+                giamgia = giagoc * 0.2m;
+                lido = "Khuyến mãi Thứ 4 Vui Vẻ (20%)";
+            }
+
+            if (day == DayOfWeek.Friday || day == DayOfWeek.Saturday || day == DayOfWeek.Sunday)
+            {
+                phuthu = 20000m;
+            }
+
+            decimal finalPrice = giagoc - giamgia + phuthu;
+
+            Console.WriteLine($"\nGiá vé gốc: {giagoc:C} VNĐ");
+            Console.WriteLine($"{lido}: -{giamgia:C} VNĐ");
+            Console.WriteLine($"Phụ thu cuối tuần: {phuthu:C} VNĐ");
+            Console.WriteLine($"TỔNG TIỀN VÉ: {finalPrice:C} VNĐ");
+
+        }
+    
+
+
         public static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
-            //   Bai_1();
-            //Bai_2();
-            //Bai_3(); 
-            //Bai_4();
-            //Bai_5();
-            //Bai_6();
-            //Bai_7();
-            //Bai_8();
-            //Bai_9();
-            // Bai_10();
-            // Bai_11();
-            // Bai_12();
-            //Bai_13();
+               Bai_1();
+            Bai_2();
+            Bai_3(); 
+            Bai_4();
+           Bai_5();
+            Bai_6();
+            Bai_7();
+            Bai_8();
+            Bai_9();
+             Bai_10();
+             Bai_11();
+              Bai_12();
+            Bai_13();
             Bai_14();
-        
+            Bai_15();
         }
 
 
