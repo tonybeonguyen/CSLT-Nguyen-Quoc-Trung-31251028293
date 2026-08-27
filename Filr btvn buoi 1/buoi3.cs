@@ -712,67 +712,11 @@ namespace Filr_btvn_buoi_1
 
         static void Bai_12()
         {
-            Console.Write("Nhập văn bản cần mã hóa: ");
-            string nhapmahoa = Console.ReadLine();
+          
 
-            int k = 0;
-            while (true)
-            {
-                Console.Write("Nhập khóa dịch chuyển Key k (từ 1 đến 25): ");
-                if (int.TryParse(Console.ReadLine(), out k) && k >= 1 && k <= 25)
-                {
-                    break;
-                }
-                Console.WriteLine("Lỗi: Khóa k phải là số nguyên từ 1 đến 25. Vui lòng nhập lại!\n");
-            }
+        
 
-            string encryptedText = EncryptCaesar(nhapmahoa, k);
-            Console.WriteLine($"\nVăn bản Mã hóa: {encryptedText}");
-
-            string decryptedText = DecryptCaesar(encryptedText, k);
-            Console.WriteLine($"Văn bản Giải mã: {decryptedText}");
-        }
-
-        static string EncryptCaesar(string text, int k)
-        {
-            char[] chars = text.ToCharArray();
-
-            for (int i = 0; i < chars.Length; i++)
-            {
-                char c = chars[i];
-
-                if (c >= 'A' && c <= 'Z')
-                {
-                    chars[i] = (char)('A' + (c - 'A' + k) % 26);
-                }
-                else if (c >= 'a' && c <= 'z')
-                {
-                    chars[i] = (char)('a' + (c - 'a' + k) % 26);
-                }
-            }
-
-            return new string(chars);
-        }
-
-        static string DecryptCaesar(string text, int k)
-        {
-            char[] chars = text.ToCharArray();
-
-            for (int i = 0; i < chars.Length; i++)
-            {
-                char c = chars[i];
-
-                if (c >= 'A' && c <= 'Z')
-                {
-                    chars[i] = (char)('A' + (c - 'A' - k + 26) % 26);
-                }
-                else if (c >= 'a' && c <= 'z')
-                {
-                    chars[i] = (char)('a' + (c - 'a' - k + 26) % 26);
-                }
-            }
-
-            return new string(chars);
+        
         }
 
         static void Bai_13()
@@ -960,7 +904,7 @@ namespace Filr_btvn_buoi_1
     
 
 
-        public static void Main(string[] args)
+        public static void Main1111111111(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
