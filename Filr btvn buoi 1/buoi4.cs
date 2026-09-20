@@ -265,7 +265,7 @@ namespace Filr_btvn_buoi_1
                 Console.WriteLine($"Tọa độ ({x};{y}) nằm trên trục x");
             }
         }
-        public static void Main(string[] args)
+        public static void Main111111111(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Bai_4_1();
