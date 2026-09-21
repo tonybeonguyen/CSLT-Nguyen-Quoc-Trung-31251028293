@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Linq;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -229,7 +230,150 @@ namespace Filr_btvn_buoi_1
             double c = 25;
             Console.WriteLine($"Input: {c} -> Output: {CelsiusToFahrenheit(c)}");
         }
-        
+        static void bai_13()
+        {
+            static int TimMin(int[] arr)
+            {
+                int min = arr[0];
+                for (int i = 1; i < arr.Length; i++)
+                {
+                    if (arr[i] < min)
+                    {
+                        min = arr[i];
+                    }
+                }
+                return min;
+            }
+            
+            int[] arr = { 10, 5, 8, 2, 9 };
+            Console.WriteLine($"Input: [{string.Join(", ", arr)}] -> Output: {TimMin(arr)}");
+
+        }
+        static void bai_14()
+        {
+            static int TongCacChuSo(int n)
+            {
+                n = Math.Abs(n);
+                int sum = 0;
+                while (n > 0)
+                {
+                    sum += n % 10;
+                    n /= 10;       
+                }
+                return sum;
+            }
+            Console.Write("Nhập số nguyên n: ");
+
+            
+            int n = int.Parse(Console.ReadLine());
+            Console.WriteLine($"Input: {n} -> Output:{TongCacChuSo(n)}");
+
+
+        }
+
+        static void bai_15()
+        {
+            static void SapXepMang(int[] arr)
+            {
+                Array.Sort(arr);
+
+            }
+            Console.Write("Nhập các số nguyên (cách nhau bằng khoảng trắng hoặc dấu phẩy): ");
+            string input = Console.ReadLine();
+            int[] arr = input.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries)
+                         .Select(s => int.Parse(s))
+                         .ToArray();
+
+            if (arr.Length > 0)
+            {
+                Console.WriteLine($"Input: [{string.Join(", ", arr)}]");
+
+                SapXepMang(arr);
+                Console.WriteLine($"Output: {string.Join(" ", arr)}");
+            }
+            }
+        static void bai_16()
+        {
+            static string XoaTrungLap(string s)
+            {
+                if (string.IsNullOrEmpty(s))
+                {
+                    return s;
+                }
+                return new string(s.Distinct().ToArray());
+            }
+            Console.Write("Nhập chuỗi cần xử lý: ");
+            string input = Console.ReadLine();
+            Console.WriteLine($"Input: {input} -> Output: {XoaTrungLap(input)}");
+        }
+        static void bai_17()
+        {
+            static int UCLN(int a, int b)
+            {
+                while (b != 0)
+                {
+                    int temp = b;
+                    b = a % b; 
+                    a = temp;  
+                }
+                return Math.Abs(a); 
+            }
+            Console.Write("Nhập số a: ");
+            int a = int.Parse(Console.ReadLine());
+
+            Console.Write("Nhập số b: ");
+            int b = int.Parse(Console.ReadLine());
+            Console.WriteLine($"Input: a = {a}, b = {b} -> Output: {UCLN(a,b)}");
+        }
+        static void bai_18()
+        {
+            static string DecimalToBinary(int n)
+            {
+                if (n == 0) return "0";
+
+                string nhiphan = "";
+                while (n > 0)
+                {
+                    nhiphan = (n % 2) + nhiphan; 
+                    n /= 2;                    
+                }
+                return nhiphan;
+            }
+            Console.Write("Nhập số thập phân n: ");
+            int n = int.Parse(Console.ReadLine());
+            Console.WriteLine($"Input: {n} -> Output: {DecimalToBinary(n)}");
+        }
+        static void bai_19()
+        {
+            static bool KiemTraNamNhuan(int year)
+            {
+                
+                if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+                {
+                    return true;
+                }
+                return false;
+            }
+            Console.Write("Nhập năm cần kiểm tra: ");
+            int year = int.Parse(Console.ReadLine());
+            Console.WriteLine($"Input: {year} -> Output: {KiemTraNamNhuan(year)}");
+        }
+        static void bai_20()
+        {
+            static int DemSoTu(string sentence)
+            {
+                if (string.IsNullOrWhiteSpace(sentence))
+                {
+                    return 0;
+                }
+                string[] words = sentence.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                return words.Length;
+            }
+            Console.Write("Nhập vào một câu bất kỳ: ");
+            string input = Console.ReadLine();
+            Console.WriteLine($"Input: {input} -> Output: {DemSoTu(input)}");
+
+        }
         public static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -245,6 +389,14 @@ namespace Filr_btvn_buoi_1
             // bai_10();
             //bai_11();
             //bai_12();
+            //bai_13();
+            ///bai_14();
+            ///bai_15();
+            ///bai_16();
+            /// bai_17();
+            ///bai_18() ;
+            ///bai_19();
+            ///bai_20();
         }
     }
 }
