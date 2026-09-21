@@ -292,23 +292,41 @@ namespace Filr_btvn_buoi_1
         {
             static void SapXepMang(int[] arr)
             {
-                Array.Sort(arr);
-
+               
+                for (int i = 0; i < arr.Length - 1; i++)
+                {
+                    for (int j = 0; j < arr.Length - i - 1; j++)
+                    {
+                        if (arr[j] > arr[j + 1])
+                        {
+                            int temp = arr[j];
+                            arr[j] = arr[j + 1];
+                            arr[j + 1] = temp;
+                        }
+                    }
+                }
             }
             Console.Write("Nhập các số nguyên (cách nhau bằng khoảng trắng hoặc dấu phẩy): ");
             string input = Console.ReadLine();
-            int[] arr = input.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries)
-                         .Select(s => int.Parse(s))
-                         .ToArray();
+
+            int[] arr = input.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
+
+
 
             if (arr.Length > 0)
             {
                 Console.WriteLine($"Input: [{string.Join(", ", arr)}]");
 
+                
                 SapXepMang(arr);
+
+                
                 Console.WriteLine($"Output: {string.Join(" ", arr)}");
             }
-            }
+        }
+            
+            
+            
         static void bai_16()
         {
             static string XoaTrungLap(string s)
@@ -394,26 +412,26 @@ namespace Filr_btvn_buoi_1
         public static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-             bai_1();
-            bai_2();
-            bai_3();
-            bai_4();
-            bai_5();
-            bai_6();
-             bai_7();
-            bai_8();
-            bai_9();
-             bai_10();
-            bai_11();
-            bai_12();
-            bai_13();
-            bai_14();
+            // bai_1();
+            //bai_2();
+            //bai_3();
+            //bai_4();
+            //bai_5();
+            //bai_6();
+            // bai_7();
+            //bai_8();
+            //bai_9();
+            // bai_10();
+            //bai_11();
+            //bai_12();
+            //bai_13();
+            //bai_14();
             bai_15();
-            bai_16();
-             bai_17();
-            bai_18() ;
-            bai_19();
-            bai_20();
+            //bai_16();
+            // bai_17();
+            //bai_18() ;
+            //bai_19();
+            //bai_20();
         }
     }
 }
