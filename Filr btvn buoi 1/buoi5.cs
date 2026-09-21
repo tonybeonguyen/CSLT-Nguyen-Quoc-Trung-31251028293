@@ -87,8 +87,11 @@ namespace Filr_btvn_buoi_1
                 return true;
 
             }
-            int x = 7;
-            int y = 10;
+            Console.Write("Nhập x: ");
+            int x = int.Parse(Console.ReadLine());
+            Console.Write("Nhập y: ");
+            int y = int.Parse(Console.ReadLine());
+
             Console.WriteLine($"Input: {x} -> Output: {KiemTraNguyenTo(x)}");
             Console.WriteLine($"Input: {y} -> Output: {KiemTraNguyenTo(y)}");
         }
@@ -113,9 +116,9 @@ namespace Filr_btvn_buoi_1
                
             }
 
-          
-           
-                int n = 6;
+
+            Console.Write("Nhập số chữ số đầu tiên:");
+                int n = int.Parse(Console.ReadLine());
 
                 Console.Write($"Input: {n} -> Output: ");
                 InFibonacci(n);
@@ -137,7 +140,8 @@ namespace Filr_btvn_buoi_1
 
                 return dem;
             }
-            string input = "Tôi yêu UEH";
+            Console.Write("Nhập câu bất kì: ");
+            string input = Console.ReadLine();
             Console.WriteLine($"Input: \"{input}\" -> Output: {DemNguyenAm(input)}");
         }
         static void bai_9()
@@ -166,11 +170,13 @@ namespace Filr_btvn_buoi_1
                 return ketQua;
             }
 
-           
-                double x = 2;
-                int y = 3;
+            Console.Write("Nhập x: ");
+            double x = double.Parse(Console.ReadLine());
+            Console.Write("Nhập y: ");
+            int y = int.Parse(Console.ReadLine());
 
-                Console.WriteLine($"Input: x = {x}, y = {y} -> Output: {TinhLuyThua(x, y)}");
+
+            Console.WriteLine($"Input: x = {x}, y = {y} -> Output: {TinhLuyThua(x, y)}");
             
         }
         static void bai_10()
@@ -191,11 +197,13 @@ namespace Filr_btvn_buoi_1
 
                 return tong / arr.Length;
             }
+            Console.Write("Nhập các số nguyên (cách nhau bằng khoảng trắng hoặc dấu phẩy): ");
+            string input = Console.ReadLine();
+            int[] arr = input.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
+              
 
-          
-                int[] arr = { 4, 5, 6, 7 };
 
-                Console.WriteLine($"Input: [{string.Join(", ", arr)}] -> Output: {TinhTrungBinh(arr)}");
+            Console.WriteLine($"Input: [{string.Join(", ", arr)}] -> Output: {TinhTrungBinh(arr)}");
             }
         static void bai_11()
         {
@@ -214,11 +222,12 @@ namespace Filr_btvn_buoi_1
                 }
                 return true;
             }
-            string chuoi1 = "radar";
-            string chuoi2 = "hello";
+            Console.Write("Nhập chuỗi: ");
+            string chuoi = Console.ReadLine();
+            
 
-            Console.WriteLine($"Input: {chuoi1} -> Output: {KiemTraDoiXung(chuoi1)}");
-            Console.WriteLine($"Input: {chuoi2} -> Output: {KiemTraDoiXung(chuoi2)}");
+            Console.WriteLine($"Input: {chuoi} -> Output: {KiemTraDoiXung(chuoi)}");
+           
         
         }
         static void bai_12()
@@ -227,7 +236,9 @@ namespace Filr_btvn_buoi_1
             {
                 return (c * 9.0 / 5.0) + 32;
             }
-            double c = 25;
+            Console.Write("Nhập số độ C: ");
+
+            double c = double.Parse(Console .ReadLine());
             Console.WriteLine($"Input: {c} -> Output: {CelsiusToFahrenheit(c)}");
         }
         static void bai_13()
@@ -244,8 +255,14 @@ namespace Filr_btvn_buoi_1
                 }
                 return min;
             }
-            
-            int[] arr = { 10, 5, 8, 2, 9 };
+
+            Console.Write("Nhập các số nguyên (cách nhau bằng khoảng trắng hoặc dấu phẩy): ");
+            string input = Console.ReadLine();
+
+     
+            int[] arr = input.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
+
+
             Console.WriteLine($"Input: [{string.Join(", ", arr)}] -> Output: {TimMin(arr)}");
 
         }
@@ -377,26 +394,26 @@ namespace Filr_btvn_buoi_1
         public static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            // bai_1();
-            //bai_2();
-            //bai_3();
-            //bai_4();
-            //bai_5();
-            //bai_6();
-            // bai_7();
-            //bai_8();
-            //bai_9();
-            // bai_10();
-            //bai_11();
-            //bai_12();
-            //bai_13();
-            ///bai_14();
-            ///bai_15();
-            ///bai_16();
-            /// bai_17();
-            ///bai_18() ;
-            ///bai_19();
-            ///bai_20();
+             bai_1();
+            bai_2();
+            bai_3();
+            bai_4();
+            bai_5();
+            bai_6();
+             bai_7();
+            bai_8();
+            bai_9();
+             bai_10();
+            bai_11();
+            bai_12();
+            bai_13();
+            bai_14();
+            bai_15();
+            bai_16();
+             bai_17();
+            bai_18() ;
+            bai_19();
+            bai_20();
         }
     }
 }
