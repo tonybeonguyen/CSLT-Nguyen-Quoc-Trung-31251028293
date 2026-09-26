@@ -712,12 +712,54 @@ namespace Filr_btvn_buoi_1
 
         static void Bai_12()
         {
+            static string EncryptCaesar(string text, int k)
+            {
+                char[] chars = text.ToCharArray();
+                for (int i = 0; i < chars.Length; i++)
+                {
+                    char c = chars[i];
+
+                   
+                    if (c >= 'A' && c <= 'Z')
+                    {
+                        chars[i] = (char)('A' + (c - 'A' + k) % 26);
+                    }
+                 
+                    else if (c >= 'a' && c <= 'z')
+                    {
+                        chars[i] = (char)('a' + (c - 'a' + k) % 26);
+                    }
+                  
+                }
+                return new string(chars);
+            }
+
           
+            static string DecryptCaesar(string text, int k)
+            {
+             
+                return EncryptCaesar(text, 26 - k);
+            }
 
-        
+       
+            Console.Write("Nhập văn bản gốc: ");
+            string text = Console.ReadLine();
 
-        
+            Console.Write("Nhập khóa dịch chuyển k (1-25): ");
+            int k = int.Parse(Console.ReadLine());
+
+            string encrypted = EncryptCaesar(text, k);
+            string decrypted = DecryptCaesar(encrypted, k);
+
+           
+            Console.WriteLine($"Văn bản Mã hóa: {encrypted}");
+            Console.WriteLine($"Văn bản Giải mã: {decrypted}");
         }
+
+        
+
+        
+        
 
         static void Bai_13()
         {
