@@ -335,7 +335,18 @@ namespace Filr_btvn_buoi_1
                 {
                     return s;
                 }
-                return new string(s.Distinct().ToArray());
+
+                string kq = "";
+                
+                foreach (char c in s)
+                {
+                   
+                    if (!kq.Contains(c))
+                    {
+                        kq += c;
+                    }
+                }
+                return kq;
             }
             Console.Write("Nhập chuỗi cần xử lý: ");
             string input = Console.ReadLine();
@@ -426,7 +437,7 @@ namespace Filr_btvn_buoi_1
             //bai_12();
             //bai_13();
             //bai_14();
-            //bai_15();
+           // bai_15();
             bai_16();
             // bai_17();
             //bai_18() ;
