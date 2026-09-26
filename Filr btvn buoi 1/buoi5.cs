@@ -426,8 +426,8 @@ namespace Filr_btvn_buoi_1
             //bai_12();
             //bai_13();
             //bai_14();
-            bai_15();
-            //bai_16();
+            //bai_15();
+            bai_16();
             // bai_17();
             //bai_18() ;
             //bai_19();
