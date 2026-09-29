@@ -420,29 +420,29 @@ namespace Filr_btvn_buoi_1
             Console.WriteLine($"Input: {input} -> Output: {DemSoTu(input)}");
 
         }
-        public static void Main(string[] args)
+        public static void Main111111111(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            // bai_1();
-            //bai_2();
-            //bai_3();
-            //bai_4();
-            //bai_5();
-            //bai_6();
-            // bai_7();
-            //bai_8();
-            //bai_9();
-            // bai_10();
-            //bai_11();
-            //bai_12();
-            //bai_13();
-            //bai_14();
-           // bai_15();
+             bai_1();
+            bai_2();
+            bai_3();
+            bai_4();
+            bai_5();
+            bai_6();
+             bai_7();
+            bai_8();
+            bai_9();
+             bai_10();
+            bai_11();
+            bai_12();
+            bai_13();
+            bai_14();
+            bai_15();
             bai_16();
-            // bai_17();
-            //bai_18() ;
-            //bai_19();
-            //bai_20();
+             bai_17();
+            bai_18() ;
+            bai_19();
+            bai_20();
         }
     }
 }
