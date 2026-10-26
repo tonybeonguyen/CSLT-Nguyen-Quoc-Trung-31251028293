@@ -11,76 +11,55 @@ namespace Filr_btvn_buoi_1
         {
             string filePath = "mytest.txt";
 
-            try
+            if (File.Exists(filePath))
             {
-                File.Create(filePath).Close();
-                Console.WriteLine("Đã tạo một tập tin trống thành công trên đĩa!");
+                File.Delete(filePath);
+                Console.WriteLine($"Đã xóa tập tin '{filePath}' thành công khỏi đĩa!");
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
+                Console.WriteLine($"Tập tin '{filePath}' không tồn tại trên đĩa.");
             }
         }
         static void bai_2()
         {
             string filePath = "mytest.txt";
 
-            try
+            if (File.Exists(filePath))
             {
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                    Console.WriteLine($"Đã xóa tập tin '{filePath}' thành công khỏi đĩa!");
-                }
-                else
-                {
-                    Console.WriteLine($"Tập tin '{filePath}' không tồn tại trên đĩa.");
-                }
+                File.Delete(filePath);
+                Console.WriteLine($"Đã xóa tập tin '{filePath}' thành công khỏi đĩa!");
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
+                Console.WriteLine($"Tập tin '{filePath}' không tồn tại trên đĩa.");
             }
         }
         static void bai_3()
         {
             string filePath = "mytest.txt";
-            string content = "Xin chào!";
+            string content = "Dòng 1: tôi yêu ueh 1.";
 
-            try
-            {
-                File.WriteAllText(filePath, content);
-                Console.WriteLine($"Đã tạo tập tin '{filePath}' và ghi nội dung thành công!");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
-            }
-        
+            File.WriteAllText(filePath, content);
+            Console.WriteLine($"Đã tạo tập tin '{filePath}' và ghi nội dung thành công!");
+
         }
         static void bai_4()
         {
             string filePath = "mytest.txt";
-            string content = "Dòng 1: hello.\nDòng 2: xin chào.";
+            string content = "Dòng 1: tôi yêu ueh 1.\nDòng 2: tôi yêu ueh 2.\nDòng 3: tôi yêu ueh 3.";
 
-            try
+            File.WriteAllText(filePath, content);
+            Console.WriteLine($"Đã tạo tập tin '{filePath}' thành công!\n");
+
+            Console.WriteLine("Nội dung đọc từ tập tin:");
+            using (StreamReader sr = new StreamReader(filePath))
             {
-                File.WriteAllText(filePath, content);
-                Console.WriteLine($"Đã tạo tập tin '{filePath}' thành công!\n");
-
-                Console.WriteLine("Nội dung đọc từ tập tin:");
-                using (StreamReader sr = new StreamReader(filePath))
+                string line;
+                while ((line = sr.ReadLine()) != null)
                 {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        Console.WriteLine(line);
-                    }
+                    Console.WriteLine(line);
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
             }
         }
         static void bai_5()
@@ -88,99 +67,81 @@ namespace Filr_btvn_buoi_1
             string filePath = "mytest.txt";
             string[] lines = new string[]
             {
-            "Dòng 1: Phần tử đầu tiên của mảng.",
-            "Dòng 2: Phần tử thứ hai của mảng.",
-            "Dòng 3: Ghi dữ liệu thành công vào file."
+    "Dòng 1: tôi yêu ueh 1.",
+    "Dòng 2: tôi yêu ueh 2.",
+    "Dòng 3: tôi yêu ueh 3."
             };
 
-            try
-            {
-                File.WriteAllLines(filePath, lines);
-                Console.WriteLine($"Đã tạo tập tin '{filePath}' và ghi mảng chuỗi thành công!");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
-            }
+            File.WriteAllLines(filePath, lines);
+            Console.WriteLine($"Đã tạo tập tin '{filePath}' và ghi mảng chuỗi thành công!");
         }
         static void bai_6()
         {
             string filePath = "mytest.txt";
             string appendText = Environment.NewLine + "Đây là dòng nội dung được nối thêm vào file.";
 
-            try
+            if (File.Exists(filePath))
             {
-                if (File.Exists(filePath))
-                {
-                    File.AppendAllText(filePath, appendText);
-                    Console.WriteLine($"Đã nối thêm nội dung vào tập tin '{filePath}' thành công!");
+                File.AppendAllText(filePath, appendText);
+                Console.WriteLine($"Đã nối thêm nội dung vào tập tin '{filePath}' thành công!");
 
-                    Console.WriteLine("\nNội dung tập tin sau khi cập nhật:");
-                    string content = File.ReadAllText(filePath);
-                    Console.WriteLine(content);
-                }
-                else
-                {
-                    Console.WriteLine($"Tập tin '{filePath}' không tồn tại trên đĩa.");
-                }
+                Console.WriteLine("\nNội dung tập tin sau khi cập nhật:");
+                string content = File.ReadAllText(filePath);
+                Console.WriteLine(content);
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
+                Console.WriteLine($"Tập tin '{filePath}' không tồn tại trên đĩa.");
             }
         }
         static void bai_7()
         {
             string sourcePath = "source.txt";
             string targetPath = "destination.txt";
-            string content = "Nội dung mẫu trong tập tin gốc để kiểm tra sao chép.";
-
-            try
+            string[] lines = new string[]
             {
-                File.WriteAllText(sourcePath, content);
-                Console.WriteLine($"Đã tạo tập tin gốc '{sourcePath}' thành công!");
+    "Dòng 1: tôi yêu ueh 1.",
+    "Dòng 2: tôi yêu ueh 2.",
+    "Dòng 3: tôi yêu ueh 3."
+            };
 
-                File.Copy(sourcePath, targetPath, true);
-                Console.WriteLine($"Đã sao chép sang tập tin mới '{targetPath}' thành công!\n");
+            File.WriteAllLines(sourcePath, lines);
+            Console.WriteLine($"Đã tạo tập tin gốc '{sourcePath}' thành công!");
 
-                Console.WriteLine($"Nội dung của tập tin sau khi sao chép ({targetPath}):");
-                string copiedContent = File.ReadAllText(targetPath);
-                Console.WriteLine(copiedContent);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
-            }
+            File.Copy(sourcePath, targetPath, true);
+            Console.WriteLine($"Đã sao chép sang tập tin mới '{targetPath}' thành công!\n");
+
+            Console.WriteLine($"Nội dung của tập tin sau khi sao chép ({targetPath}):");
+            string copiedContent = File.ReadAllText(targetPath);
+            Console.WriteLine(copiedContent);
         }
 
         static void bai_8()
         {
             string sourcePath = "original.txt";
             string targetPath = "renamed.txt";
-            string content = "Nội dung mẫu kiểm tra việc đổi tên và di chuyển tập tin.";
-
-            try
+            string[] lines = new string[]
             {
-                File.WriteAllText(sourcePath, content);
-                Console.WriteLine($"Đã tạo tập tin '{sourcePath}' thành công!");
+    "Dòng 1: tôi yêu ueh 1.",
+    "Dòng 2: tôi yêu ueh 2.",
+    "Dòng 3: tôi yêu ueh 3."
+            };
 
-                if (File.Exists(targetPath))
-                {
-                    File.Delete(targetPath);
-                }
+            File.WriteAllLines(sourcePath, lines);
+            Console.WriteLine($"Đã tạo tập tin '{sourcePath}' thành công!");
 
-                File.Move(sourcePath, targetPath);
-                Console.WriteLine($"Đã di chuyển/đổi tên tập tin sang '{targetPath}' trong cùng thư mục thành công!");
-
-                if (File.Exists(targetPath))
-                {
-                    Console.WriteLine("\nNội dung của tập tin sau khi di chuyển:");
-                    Console.WriteLine(File.ReadAllText(targetPath));
-                }
+            if (File.Exists(targetPath))
+            {
+                File.Delete(targetPath);
             }
-            catch (Exception ex)
+
+            File.Move(sourcePath, targetPath);
+            Console.WriteLine($"Đã di chuyển/đổi tên tập tin sang '{targetPath}' trong cùng thư mục thành công!");
+
+            if (File.Exists(targetPath))
             {
-                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
+                Console.WriteLine("\nNội dung của tập tin sau khi di chuyển:");
+                Console.WriteLine(File.ReadAllText(targetPath));
             }
         }
         static void bai_9()
@@ -188,40 +149,33 @@ namespace Filr_btvn_buoi_1
             string filePath = "mytest.txt";
             string[] lines = new string[]
             {
-            "Dòng 1: Đây là dòng đầu tiên của tập tin.",
-            "Dòng 2: Đây là dòng thứ hai.",
-            "Dòng 3: Đây là dòng thứ ba."
+    "Dòng 1: tôi yêu ueh 1.",
+    "Dòng 2: tôi yêu ueh 2.",
+    "Dòng 3: tôi yêu ueh 3."
             };
 
-            try
+            File.WriteAllLines(filePath, lines);
+            Console.WriteLine($"Đã tạo tập tin '{filePath}' với dữ liệu mẫu thành công!\n");
+
+            if (File.Exists(filePath))
             {
-                File.WriteAllLines(filePath, lines);
-                Console.WriteLine($"Đã tạo tập tin '{filePath}' với dữ liệu mẫu thành công!\n");
-
-                if (File.Exists(filePath))
+                using (StreamReader sr = new StreamReader(filePath))
                 {
-                    using (StreamReader sr = new StreamReader(filePath))
-                    {
-                        string firstLine = sr.ReadLine();
+                    string firstLine = sr.ReadLine();
 
-                        if (firstLine != null)
-                        {
-                            Console.WriteLine($"Dòng đầu tiên của tập tin là:\n{firstLine}");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Tập tin đang rỗng.");
-                        }
+                    if (firstLine != null)
+                    {
+                        Console.WriteLine($"Dòng đầu tiên của tập tin là:\n{firstLine}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Tập tin đang rỗng.");
                     }
                 }
-                else
-                {
-                    Console.WriteLine($"Tập tin '{filePath}' không tồn tại trên đĩa.");
-                }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
+                Console.WriteLine($"Tập tin '{filePath}' không tồn tại trên đĩa.");
             }
         }
         static void bai_10()
@@ -229,46 +183,39 @@ namespace Filr_btvn_buoi_1
             string filePath = "mytest.txt";
             string[] lines = new string[]
             {
-            "Dòng 1: Nội dung dòng đầu tiên.",
-            "Dòng 2: Nội dung dòng thứ hai.",
-            "Dòng 3: Nội dung dòng thứ ba.",
-            "Dòng 4: Đây là dòng cuối cùng của tập tin."
+    "Dòng 1: tôi yêu ueh 1.",
+    "Dòng 2: tôi yêu ueh 2.",
+    "Dòng 3: tôi yêu ueh 3.",
+    "Dòng 4: tôi yêu ueh 4."
             };
 
-            try
+            File.WriteAllLines(filePath, lines);
+            Console.WriteLine($"Đã tạo tập tin '{filePath}' với dữ liệu mẫu thành công!\n");
+
+            if (File.Exists(filePath))
             {
-                File.WriteAllLines(filePath, lines);
-                Console.WriteLine($"Đã tạo tập tin '{filePath}' với dữ liệu mẫu thành công!\n");
-
-                if (File.Exists(filePath))
+                string lastLine = null;
+                using (StreamReader sr = new StreamReader(filePath))
                 {
-                    string lastLine = null;
-                    using (StreamReader sr = new StreamReader(filePath))
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
                     {
-                        string line;
-                        while ((line = sr.ReadLine()) != null)
-                        {
-                            lastLine = line;
-                        }
+                        lastLine = line;
                     }
+                }
 
-                    if (lastLine != null)
-                    {
-                        Console.WriteLine($"Dòng cuối cùng của tập tin là:\n{lastLine}");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Tập tin đang rỗng.");
-                    }
+                if (lastLine != null)
+                {
+                    Console.WriteLine($"Dòng cuối cùng của tập tin là:\n{lastLine}");
                 }
                 else
                 {
-                    Console.WriteLine($"Tập tin '{filePath}' không tồn tại trên đĩa.");
+                    Console.WriteLine("Tập tin đang rỗng.");
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
+                Console.WriteLine($"Tập tin '{filePath}' không tồn tại trên đĩa.");
             }
         }
         static void bai_11()
@@ -276,41 +223,33 @@ namespace Filr_btvn_buoi_1
             string filePath = "mytest.txt";
             string[] sampleLines = new string[]
             {
-            "Dòng 1: Nội dung bài kiểm tra số 1",
-            "Dòng 2: Nội dung bài kiểm tra số 2",
-            "Dòng 3: Nội dung bài kiểm tra số 3",
-            "Dòng 4: Nội dung bài kiểm tra số 4",
-            "Dòng 5: Nội dung bài kiểm tra số 5",
-            "Dòng 6: Nội dung bài kiểm tra số 6"
+    "Dòng 1: tôi yêu ueh 1.",
+    "Dòng 2: tôi yêu ueh 2.",
+    "Dòng 3: tôi yêu ueh 3.",
+    "Dòng 4: tôi yêu ueh 4.",
+    "Dòng 5: tôi yêu ueh 5."
             };
 
-            try
+            File.WriteAllLines(filePath, sampleLines);
+            Console.WriteLine($"Đã tạo tập tin '{filePath}' với {sampleLines.Length} dòng nội dung thành công!\n");
+
+            Console.Write("Nhập số dòng cuối cùng cần đọc (n): ");
+            if (int.TryParse(Console.ReadLine(), out int n) && n > 0)
             {
-                File.WriteAllLines(filePath, sampleLines);
-                Console.WriteLine($"Đã tạo tập tin '{filePath}' với {sampleLines.Length} dòng nội dung thành công!\n");
+                string[] allLines = File.ReadAllLines(filePath);
+                int totalLines = allLines.Length;
 
-                Console.Write("Nhập số dòng cuối cùng cần đọc (n): ");
-                if (int.TryParse(Console.ReadLine(), out int n) && n > 0)
+                int startIndex = Math.Max(0, totalLines - n);
+
+                Console.WriteLine($"\n{Math.Min(n, totalLines)} dòng cuối cùng của tập tin là:");
+                for (int i = startIndex; i < totalLines; i++)
                 {
-                    string[] allLines = File.ReadAllLines(filePath);
-                    int totalLines = allLines.Length;
-
-                    int startIndex = Math.Max(0, totalLines - n);
-
-                    Console.WriteLine($"\n{Math.Min(n, totalLines)} dòng cuối cùng của tập tin là:");
-                    for (int i = startIndex; i < totalLines; i++)
-                    {
-                        Console.WriteLine(allLines[i]);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Giá trị n không hợp lệ. Vui lòng nhập số nguyên dương!");
+                    Console.WriteLine(allLines[i]);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
+                Console.WriteLine("Giá trị n không hợp lệ. Vui lòng nhập số nguyên dương!");
             }
         }
         static void bai_12()
@@ -318,40 +257,33 @@ namespace Filr_btvn_buoi_1
             string filePath = "mytest.txt";
             string[] sampleLines = new string[]
             {
-            "Dòng 1: UEH - Đại học Kinh tế TP.HCM",
-            "Dòng 2: Tôi yêu trường",
-            "Dòng 3: Tôi yêu cơ sở lập trình",
-            "Dòng 4: hy vọng điểm cao",
-            "Dòng 5: Hoàn thành bài tập số 12"
+    "Dòng 1: UEH - Đại học Kinh tế TP.HCM",
+    "Dòng 2: Tôi yêu trường",
+    "Dòng 3: Tôi yêu cơ sở lập trình",
+    "Dòng 4: hy vọng điểm cao",
+    "Dòng 5: Hoàn thành bài tập số 12"
             };
 
-            try
+            File.WriteAllLines(filePath, sampleLines);
+            Console.WriteLine($"Đã tạo tập tin '{filePath}' với {sampleLines.Length} dòng nội dung thành công!\n");
+
+            Console.Write($"Nhập số thứ tự dòng muốn đọc (từ 1 đến {sampleLines.Length}): ");
+            if (int.TryParse(Console.ReadLine(), out int lineNumber) && lineNumber > 0)
             {
-                File.WriteAllLines(filePath, sampleLines);
-                Console.WriteLine($"Đã tạo tập tin '{filePath}' với {sampleLines.Length} dòng nội dung thành công!\n");
+                string[] allLines = File.ReadAllLines(filePath);
 
-                Console.Write($"Nhập số thứ tự dòng muốn đọc (từ 1 đến {sampleLines.Length}): ");
-                if (int.TryParse(Console.ReadLine(), out int lineNumber) && lineNumber > 0)
+                if (lineNumber <= allLines.Length)
                 {
-                    string[] allLines = File.ReadAllLines(filePath);
-
-                    if (lineNumber <= allLines.Length)
-                    {
-                        Console.WriteLine($"\nNội dung tại dòng {lineNumber} là:\n{allLines[lineNumber - 1]}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Tập tin chỉ có {allLines.Length} dòng. Không tìm thấy dòng {lineNumber}!");
-                    }
+                    Console.WriteLine($"\nNội dung tại dòng {lineNumber} là:\n{allLines[lineNumber - 1]}");
                 }
                 else
                 {
-                    Console.WriteLine("Số dòng không hợp lệ. Vui lòng nhập số nguyên dương!");
+                    Console.WriteLine($"Tập tin chỉ có {allLines.Length} dòng. Không tìm thấy dòng {lineNumber}!");
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
+                Console.WriteLine("Số dòng không hợp lệ. Vui lòng nhập số nguyên dương!");
             }
         }
         static void bai_13()
@@ -359,39 +291,32 @@ namespace Filr_btvn_buoi_1
             string filePath = "mytest.txt";
             string[] sampleLines = new string[]
             {
-            "Dòng thứ nhất",
-            "Dòng thứ hai",
-            "Dòng thứ ba",
-            "Dòng thứ tư",
-            "Dòng thứ năm"
+    "tôi yêu ueh",
+    "tôi yêu ueh 2",
+    "tôi yêu ueh3",
+    "tôi yêu ueh4",
+    "tôi yêu ueh5"
             };
 
-            try
-            {
-                File.WriteAllLines(filePath, sampleLines);
-                Console.WriteLine($"Đã tạo tập tin '{filePath}' thành công!\n");
+            File.WriteAllLines(filePath, sampleLines);
+            Console.WriteLine($"Đã tạo tập tin '{filePath}' thành công!\n");
 
-                if (File.Exists(filePath))
+            if (File.Exists(filePath))
+            {
+                int lineCount = 0;
+                using (StreamReader sr = new StreamReader(filePath))
                 {
-                    int lineCount = 0;
-                    using (StreamReader sr = new StreamReader(filePath))
+                    while (sr.ReadLine() != null)
                     {
-                        while (sr.ReadLine() != null)
-                        {
-                            lineCount++;
-                        }
+                        lineCount++;
                     }
+                }
 
-                    Console.WriteLine($"Tổng số dòng trong tập tin là: {lineCount}");
-                }
-                else
-                {
-                    Console.WriteLine($"Tập tin '{filePath}' không tồn tại trên đĩa.");
-                }
+                Console.WriteLine($"Tổng số dòng trong tập tin là: {lineCount}");
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
+                Console.WriteLine($"Tập tin '{filePath}' không tồn tại trên đĩa.");
             }
         }
         static void bai_14()
@@ -400,105 +325,77 @@ namespace Filr_btvn_buoi_1
             {
                 Console.WriteLine($"{indent}[Thư mục] {dir.Name}");
 
-                try
+                foreach (FileInfo file in dir.GetFiles())
                 {
-                   
-                    foreach (FileInfo file in dir.GetFiles())
-                    {
-                        Console.WriteLine($"{indent}  |-- [Tập tin] {file.Name}");
-                    }
+                    Console.WriteLine($"{indent}  |-- [Tập tin] {file.Name}");
+                }
 
-                   
-                    foreach (DirectoryInfo subDir in dir.GetDirectories())
-                    {
-                        PrintFolderStructure(subDir, indent + "  ");
-                    }
-                }
-                catch (UnauthorizedAccessException)
+                foreach (DirectoryInfo subDir in dir.GetDirectories())
                 {
-                    Console.WriteLine($"{indent}  |-- [Không có quyền truy cập]");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"{indent}  |-- Lỗi: {ex.Message}");
+                    PrintFolderStructure(subDir, indent + "  ");
                 }
             }
 
+            Console.Write("Nhập đường dẫn thư mục cần kiểm tra: ");
+            string folderPath = Console.ReadLine() ?? "";
 
-                Console.Write("Nhập đường dẫn thư mục cần kiểm tra: ");
-                string folderPath = Console.ReadLine() ?? "";
-
-                try
-                {
-                    if (Directory.Exists(folderPath))
-                    {
-                        DirectoryInfo dirInfo = new DirectoryInfo(folderPath);
-                        Console.WriteLine($"\nCấu trúc thư mục của '{dirInfo.FullName}':\n");
-                        PrintFolderStructure(dirInfo);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Thư mục không tồn tại trên đĩa.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
-                }
+            if (Directory.Exists(folderPath))
+            {
+                DirectoryInfo dirInfo = new DirectoryInfo(folderPath);
+                Console.WriteLine($"\nCấu trúc thư mục của '{dirInfo.FullName}':\n");
+                PrintFolderStructure(dirInfo);
             }
+            else
+            {
+                Console.WriteLine("Thư mục không tồn tại trên đĩa.");
+            }
+        }
         static void bai_15()
         {
             string filepath = "mytest.txt";
 
-            try
+            if (File.Exists(filepath))
             {
-                if (File.Exists(filepath))
+                int[,] stats = new int[128, 2];
+                for (int i = 0; i < 128; i++)
                 {
-                    int[,] stats = new int[128, 2];
-                    for (int i = 0; i < 128; i++)
-                    {
-                        stats[i, 0] = i;
-                        stats[i, 1] = 0;
-                    }
+                    stats[i, 0] = i;
+                    stats[i, 1] = 0;
+                }
 
-                    string content = File.ReadAllText(filepath);
+                string content = File.ReadAllText(filepath);
 
-                    foreach (char c in content)
+                foreach (char c in content)
+                {
+                    if (c < 128)
                     {
-                        if (c < 128)
-                        {
-                            stats[(int)c, 1]++;
-                        }
-                    }
-
-                    Console.WriteLine("Thống kê ký tự chữ số");
-                    for (int i = 0; i < 128; i++)
-                    {
-                        char c = (char)stats[i, 0];
-                        if (char.IsDigit(c) && stats[i, 1] > 0)
-                        {
-                            Console.WriteLine($"Ký tự số '{c}': {stats[i, 1]} lần");
-                        }
-                    }
-
-                    Console.WriteLine("Thông kê ký tự chữ cái");
-                    for (int i = 0; i < 128; i++)
-                    {
-                        char c = (char)stats[i, 0];
-                        if (char.IsLetter(c) && stats[i, 1] > 0)
-                        {
-                            Console.WriteLine($"Ký tự chữ '{c}': {stats[i, 1]} lần");
-                        }
+                        stats[(int)c, 1]++;
                     }
                 }
-                else
+
+                Console.WriteLine("Thống kê ký tự chữ số");
+                for (int i = 0; i < 128; i++)
                 {
-                    Console.WriteLine($"Tập tin '{filepath}' không tồn tại trên đĩa.");
+                    char c = (char)stats[i, 0];
+                    if (char.IsDigit(c) && stats[i, 1] > 0)
+                    {
+                        Console.WriteLine($"Ký tự số '{c}': {stats[i, 1]} lần");
+                    }
+                }
+
+                Console.WriteLine("Thông kê ký tự chữ cái");
+                for (int i = 0; i < 128; i++)
+                {
+                    char c = (char)stats[i, 0];
+                    if (char.IsLetter(c) && stats[i, 1] > 0)
+                    {
+                        Console.WriteLine($"Ký tự chữ '{c}': {stats[i, 1]} lần");
+                    }
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
+                Console.WriteLine($"Tập tin '{filepath}' không tồn tại trên đĩa.");
             }
         }
         public static void Main111111111111111111111111(string[] args)
