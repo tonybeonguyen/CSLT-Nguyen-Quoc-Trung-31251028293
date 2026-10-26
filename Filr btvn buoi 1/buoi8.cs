@@ -471,7 +471,7 @@ namespace Filr_btvn_buoi_1
                         }
                     }
 
-                    Console.WriteLine("thống kê ký tự chữ số");
+                    Console.WriteLine("Thống kê ký tự chữ số");
                     for (int i = 0; i < 128; i++)
                     {
                         char c = (char)stats[i, 0];
