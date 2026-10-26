@@ -501,7 +501,7 @@ namespace Filr_btvn_buoi_1
                 Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
             }
         }
-        public static void Main(string[] args)
+        public static void Main111111111111111111111111(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             bai_1();

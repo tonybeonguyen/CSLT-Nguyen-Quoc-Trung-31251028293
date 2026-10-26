@@ -303,7 +303,7 @@ namespace Filr_btvn_buoi_1
 
            
         }
-        public static void Main(string[] args)
+        public static void Main1111111111111(string[] args)
         {
             Console.OutputEncoding=Encoding.UTF8;
             bai_1();

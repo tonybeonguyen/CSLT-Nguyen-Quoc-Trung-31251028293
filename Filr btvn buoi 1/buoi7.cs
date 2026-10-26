@@ -365,7 +365,7 @@ namespace Filr_btvn_buoi_1
                 Console.WriteLine("ko thay chuoi can tim.");
             }
         }
-        public static void Main(string[] args)
+        public static void Main111111111111111111111(string[] args)
         {
             bai_1();
             bai_2();
